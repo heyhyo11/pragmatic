@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
@@ -49,7 +49,7 @@ class AccountUpdateView(UpdateView):
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
-class AccountDeleteView(DetailView):
+class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
